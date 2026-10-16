@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-
 namespace ConsoleMenuBuilder;
 
 public class Menu : IEnumerable
