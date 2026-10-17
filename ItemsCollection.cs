@@ -20,6 +20,6 @@ internal sealed class ItemsCollection
     private void SetSelectedItems(string[] args, int level)
     {
         var arg = Array.Find(args, a => a.StartsWith(this.config.ArgsPreselectedItemsKey));
-        this.SetSelectedItems(level, this.config.ArgsPreselectedItemsKey, ref arg);
+        this.SetSelectedItems(this.config.ArgsPreselectedItemsKey, level, ref arg);
     }
 }
