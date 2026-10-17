@@ -10,7 +10,9 @@ public class MenuConfiguration
     }
     internal MenuConfiguration(MenuConfiguration config) : this()
     {
-        
+        this.ArgsPreselectedItemsKey = config.ArgsPreselectedItemsKey;
+        this.ArgsPrecelectedItemsValueSeperator = config.ArgsPrecelectedItemsValueSeperator;
+
         this.ClearConsole = config.ClearConsole;
         this.EnableWriteTitle = config.EnableWriteTitle;
         this.InputEncoding = config.InputEncoding;
@@ -18,10 +20,11 @@ public class MenuConfiguration
         this.ItemBackgroundColor = config.ItemBackgroundColor;
         this.ItemForegroundColor = config.ItemForegroundColor;
         this.WriteItemAction = config.WriteItemAction;
-        this.ArgsPreselectedItemsKey = config.ArgsPreselectedItemsKey;
+        this.WriteTitleAction = config.WriteTitleAction;
     }
 
     public string ArgsPreselectedItemsKey = "--menu-select=";
+    public char ArgsPrecelectedItemsValueSeperator = '.';
 
     public Action<MenuItem> WriteItemAction;
     public string Title = "My Menu";
@@ -33,6 +36,7 @@ public class MenuConfiguration
     public ConsoleColor ItemForegroundColor = Console.ForegroundColor;
     public ConsoleColor SelectedItemBackgroundColor = Console.BackgroundColor;
     public ConsoleColor SelectedItemForeground = Console.ForegroundColor;
+    public Action<string> WriteTitleAction = title => Console.WriteLine(title);
 
     private static void ItemAction(MenuItem item)
     {

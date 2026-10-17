@@ -21,7 +21,7 @@ public sealed class MenuItem
         {
             value();
             return Task.CompletedTask;
-        }
+        };
     }
 
     public Func<CancellationToken, Task> AsyncAction { get; set; }

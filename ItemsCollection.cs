@@ -17,9 +17,23 @@ internal sealed class ItemsCollection
         this.SetSelectedItems(args, level);
     }
 
-    private void SetSelectedItems(string[] args, int level)
+    public List<MenuItem> Items => this.menuItems;
+
+    public void SetSelectedItems(string[] args, int level)
     {
         var arg = Array.Find(args, a => a.StartsWith(this.config.ArgsPreselectedItemsKey));
-        this.SetSelectedItems(this.config.ArgsPreselectedItemsKey, level, ref arg);
+        this.SetSelectedItems(level, this.config.ArgsPreselectedItemsKey, ref arg);
+    }
+
+    private void SetSelectedItems(int level, string paramKey, ref string? arg)
+    {
+        if (arg == null)
+        {
+            return;
+        }
+
+        arg = arg.Replace(paramKey, string.Empty).Trim();
+        var items = arg.SplitItems(this.config.ArgsPrecelectedItemsValueSeperator, '\'');
+        
     }
 }
