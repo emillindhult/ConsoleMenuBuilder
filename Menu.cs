@@ -3,14 +3,12 @@ namespace ConsoleMenuBuilder;
 
 public class Menu : IEnumerable
 {
-    private IConsole Console = new SystemConsole();
+    private IConsole console = new SystemConsole();
     private readonly ItemsCollection menuItems;
     private readonly CloseTrigger closeTrigger;
     private MenuConfiguration config = new MenuConfiguration();
     private Menu? parent = null;
     private bool isShown = false;
-    private MenuConfiguration config = new MenuConfiguration();
-    private Menu? parent = null;
 
     public Menu()
     {
@@ -40,23 +38,6 @@ public class Menu : IEnumerable
     {
         get => this.menuItems.CurrentItem;
         set => this.menuItems.CurrentItem = value;
-    }
-
-    private IReadOnlyList<string> Titles
-    {
-        get
-        {
-            Menu? current = this;
-            List<string> titles = new();
-            while (current != null)
-            {
-                titles.Add(current.config.Title ?? "");
-                current = current.parent;
-            }
-
-            titles.Reverse();
-            return titles;
-        }
     }
 
     public static Task Close(CancellationToken cancellationToken) => throw new InvalidOperationException("Don't run this method directly. Just passa a reference to this method.");
@@ -102,8 +83,7 @@ public class Menu : IEnumerable
 
         await new MenuDisplay(
             this.menuItems,
-            this.Console,
-            new List<string>(this.Titles),
+            this.console,
             this.config,
             this.closeTrigger).ShowAsync(cancellationToken);
     }

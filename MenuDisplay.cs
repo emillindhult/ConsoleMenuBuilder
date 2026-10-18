@@ -4,7 +4,6 @@ internal sealed class MenuDisplay
 {
     private readonly IConsole console;
     private readonly ItemsCollection menuItems;
-    private readonly List<string> titles;
     private readonly MenuConfiguration config;
     private readonly VisibilityManager visibility;
     private readonly CloseTrigger closeTrigger;
@@ -12,13 +11,11 @@ internal sealed class MenuDisplay
 
     public MenuDisplay(ItemsCollection menuItems,
         IConsole console,
-        List<string> titles,
         MenuConfiguration config,
         CloseTrigger closeTrigger)
     {
         this.menuItems = menuItems;
         this.console = console;
-        this.titles = titles;
         this.config = config;
         this.visibility = new VisibilityManager(menuItems.Items.Count);
         this.closeTrigger = closeTrigger;
