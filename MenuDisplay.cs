@@ -7,7 +7,7 @@ internal sealed class MenuDisplay
     private readonly MenuConfiguration config;
     private readonly VisibilityManager visibility;
     private readonly CloseTrigger closeTrigger;
-    //private readonly string noSelectorLine;
+    private readonly string noSelectorLine;
 
     public MenuDisplay(ItemsCollection menuItems,
         IConsole console,
@@ -19,6 +19,7 @@ internal sealed class MenuDisplay
         this.config = config;
         this.visibility = new VisibilityManager(menuItems.Items.Count);
         this.closeTrigger = closeTrigger;
+        this.noSelectorLine = new string(' ', this.config.Selector.Length);
     }
 
     public async Task ShowAsync(CancellationToken cancellationToken)
@@ -104,12 +105,13 @@ internal sealed class MenuDisplay
 
     private void WriteLineWithItem(MenuItem menuItem)
     {
+        this.console.CursorVisible = false;
         if (this.menuItems.IsSelected(menuItem))
         {
             this.console.BackgroundColor = this.config.SelectedItemBackgroundColor;
             this.console.ForegroundColor = this.config.SelectedItemForegroundColor;
+            this.console.Write(this.config.Selector);
             this.config.WriteItemAction(menuItem);
-            this.console.WriteLine();
             this.console.BackgroundColor = this.config.ItemBackgroundColor;
             this.console.ForegroundColor = this.config.ItemForegroundColor;
         }
@@ -117,8 +119,8 @@ internal sealed class MenuDisplay
         {
             this.console.BackgroundColor = this.config.ItemBackgroundColor;
             this.console.ForegroundColor = this.config.ItemForegroundColor;
+            this.console.Write(this.noSelectorLine);
             this.config.WriteItemAction(menuItem);
-            this.console.WriteLine();
         }
     }
 }

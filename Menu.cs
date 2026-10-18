@@ -16,22 +16,6 @@ public class Menu : IEnumerable
         this.closeTrigger = new CloseTrigger();
     }
 
-    public Menu(string[] args, int level)
-    {
-        if (args == null)
-        {
-            throw new ArgumentNullException(nameof(args));
-        }
-
-        if (level < 0)
-        {
-            throw new ArgumentException("Cannot be less than 0.", nameof(level));
-        }
-
-        this.menuItems = new ItemsCollection(args, level);
-        this.closeTrigger = new CloseTrigger();
-    }
-
     public IReadOnlyList<MenuItem> Items => this.menuItems.Items;
 
     public MenuItem CurrentItem
@@ -41,6 +25,11 @@ public class Menu : IEnumerable
     }
 
     public static Task Close(CancellationToken cancellationToken) => throw new InvalidOperationException("Don't run this method directly. Just passa a reference to this method.");
+
+    public void CloseMenu()
+    {
+        this.closeTrigger.SetOn();
+    }
 
     public Menu Add(string name, Action action)
     {
@@ -64,6 +53,48 @@ public class Menu : IEnumerable
             action();
             return Task.CompletedTask;
         });
+        return this;
+    }
+
+    public Menu Add(string name, Action<Menu> action)
+    {
+        if (name == null)
+        {
+            throw new ArgumentNullException(nameof(name));
+        }
+
+        if (action is null)
+        {
+            throw new ArgumentNullException(nameof(action));
+        }
+
+        this.menuItems.Add(name, (_) =>
+        {
+            action(this);
+            return Task.CompletedTask;
+        });
+        return this;
+    }
+
+    public Menu Configure(Action<MenuConfiguration> configure)
+    {
+        if (configure is null)
+        {
+            throw new ArgumentNullException(nameof(configure));
+        }
+
+        configure.Invoke(this.config);
+        return this;
+    }
+
+    public Menu Configure(MenuConfiguration config)
+    {
+        if (config is null)
+        {
+            throw new ArgumentNullException(nameof(config));
+        }
+
+        this.config = new MenuConfiguration(config);
         return this;
     }
 

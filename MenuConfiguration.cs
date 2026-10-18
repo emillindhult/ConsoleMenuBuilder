@@ -28,18 +28,19 @@ public class MenuConfiguration
 
     public Action<MenuItem> WriteItemAction;
     public string Title = "My Menu";
+    public string Selector = "-> ";
     public bool ClearConsole = true;
-    public bool EnableWriteTitle = false;
+    public bool EnableWriteTitle = true;
     public Encoding InputEncoding = Console.InputEncoding;
     public Encoding OutputEncoding = Console.OutputEncoding;
     public ConsoleColor ItemBackgroundColor = Console.BackgroundColor;
     public ConsoleColor ItemForegroundColor = Console.ForegroundColor;
-    public ConsoleColor SelectedItemBackgroundColor = Console.BackgroundColor;
-    public ConsoleColor SelectedItemForegroundColor = Console.ForegroundColor;
+    public ConsoleColor SelectedItemBackgroundColor = Console.ForegroundColor;
+    public ConsoleColor SelectedItemForegroundColor = Console.BackgroundColor;
     public Action<string> WriteTitleAction = title => Console.WriteLine(title);
 
     private static void ItemAction(MenuItem item)
     {
-        Console.WriteLine("[{0}] [1]", item.Index + 1, item.Name);
+        Console.WriteLine("{0}", item.Name);
     }
 }
