@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ConsoleMenuBuilder/ConsoleMenuBuilder.csproj" />
+  <Project Path="ConsoleMenuBuilderSampleApp/ConsoleMenuBuilderSampleApp.csproj" Id="a391404b-e0ea-4f80-9387-18910a485af8" />
+</Solution>
