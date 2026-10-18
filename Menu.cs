@@ -9,6 +9,8 @@ public class Menu : IEnumerable
     private MenuConfiguration config = new MenuConfiguration();
     private Menu? parent = null;
     private bool isShown = false;
+    private MenuConfiguration config = new MenuConfiguration();
+    private Menu? parent = null;
 
     public Menu()
     {
