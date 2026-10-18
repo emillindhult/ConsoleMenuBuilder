@@ -35,7 +35,7 @@ public class MenuConfiguration
     public ConsoleColor ItemBackgroundColor = Console.BackgroundColor;
     public ConsoleColor ItemForegroundColor = Console.ForegroundColor;
     public ConsoleColor SelectedItemBackgroundColor = Console.BackgroundColor;
-    public ConsoleColor SelectedItemForeground = Console.ForegroundColor;
+    public ConsoleColor SelectedItemForegroundColor = Console.ForegroundColor;
     public Action<string> WriteTitleAction = title => Console.WriteLine(title);
 
     private static void ItemAction(MenuItem item)
