@@ -7,17 +7,17 @@ internal class Program
     static void Main(string[] args)
     {
         var menu = new Menu()
-            .Add("One", () =>
+            .Add("Add Book", () =>
             {
                 Console.WriteLine("Testing");
                 Console.ReadKey();
             })
-            .Add("Two", () => Console.WriteLine())
-            .Add("Three", () => Console.WriteLine())
+            .Add("Remove Book", () => Console.WriteLine())
+            .Add("List Books", () => Console.WriteLine())
             .Add("Exit", () => Environment.Exit(0))
             .Configure(config =>
             {
-                config.Title = "Library Manager";
+                config.Title = "Library";
             });
 
         menu.Show();

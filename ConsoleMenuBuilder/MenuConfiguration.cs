@@ -37,10 +37,17 @@ public class MenuConfiguration
     public ConsoleColor ItemForegroundColor = Console.ForegroundColor;
     public ConsoleColor SelectedItemBackgroundColor = Console.ForegroundColor;
     public ConsoleColor SelectedItemForegroundColor = Console.BackgroundColor;
-    public Action<string> WriteTitleAction = title => Console.WriteLine(title);
+    public Action<string> WriteTitleAction = title => TitleAction(title);
 
     private static void ItemAction(MenuItem item)
     {
         Console.WriteLine("{0}", item.Name);
+    }
+
+    private static void TitleAction(string title)
+    {
+        Console.WriteLine(" -------------------- ");
+        Console.WriteLine($"|      {title}      |");
+        Console.WriteLine(" -------------------- ");
     }
 }

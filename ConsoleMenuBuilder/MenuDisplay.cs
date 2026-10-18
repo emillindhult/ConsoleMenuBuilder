@@ -62,7 +62,7 @@ internal sealed class MenuDisplay
                     breakIteration = false;
                     break;
                 }
-            //readKey:
+
                 key = this.console.ReadKey(true);
 
                 if (key.Key == ConsoleKey.DownArrow)
