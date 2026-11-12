@@ -13,12 +13,16 @@ public class MenuConfiguration
         this.ArgsPreselectedItemsKey = config.ArgsPreselectedItemsKey;
         this.ArgsPrecelectedItemsValueSeperator = config.ArgsPrecelectedItemsValueSeperator;
 
+        this.Title = config.Title;
+        this.Selector = config.Selector;
         this.ClearConsole = config.ClearConsole;
         this.EnableWriteTitle = config.EnableWriteTitle;
         this.InputEncoding = config.InputEncoding;
         this.OutputEncoding = config.OutputEncoding;
         this.ItemBackgroundColor = config.ItemBackgroundColor;
         this.ItemForegroundColor = config.ItemForegroundColor;
+        this.SelectedItemBackgroundColor = config.SelectedItemBackgroundColor;
+        this.SelectedItemForegroundColor = config.SelectedItemForegroundColor;
         this.WriteItemAction = config.WriteItemAction;
         this.WriteTitleAction = config.WriteTitleAction;
     }

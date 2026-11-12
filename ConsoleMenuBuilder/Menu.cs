@@ -3,7 +3,7 @@ namespace ConsoleMenuBuilder;
 
 public class Menu : IEnumerable
 {
-    private IConsole console = new SystemConsole();
+    private readonly IConsole console;
     private readonly ItemsCollection menuItems;
     private readonly CloseTrigger closeTrigger;
     private MenuConfiguration config = new MenuConfiguration();
@@ -11,7 +11,13 @@ public class Menu : IEnumerable
     private bool isShown = false;
 
     public Menu()
+        : this(new SystemConsole())
     {
+    }
+
+    internal Menu(IConsole console)
+    {
+        this.console = console ?? throw new ArgumentNullException(nameof(console));
         this.menuItems = new ItemsCollection();
         this.closeTrigger = new CloseTrigger();
     }
@@ -24,7 +30,11 @@ public class Menu : IEnumerable
         set => this.menuItems.CurrentItem = value;
     }
 
-    public static Task Close(CancellationToken cancellationToken) => throw new InvalidOperationException("Don't run this method directly. Just passa a reference to this method.");
+    /// <summary>
+    /// Marker action that closes the menu when its item is chosen.
+    /// Use it as <c>menu.Add("Back", Menu.Close)</c>; don't call it directly.
+    /// </summary>
+    public static Task Close(CancellationToken cancellationToken) => throw new InvalidOperationException("Don't run this method directly. Just pass a reference to this method.");
 
     public void CloseMenu()
     {
@@ -73,6 +83,23 @@ public class Menu : IEnumerable
             action(this);
             return Task.CompletedTask;
         });
+        return this;
+    }
+
+    public Menu Add(string name, Func<CancellationToken, Task> action)
+    {
+        if (name == null)
+        {
+            throw new ArgumentNullException(nameof(name));
+        }
+
+        if (action is null)
+        {
+            throw new ArgumentNullException(nameof(action));
+        }
+
+        // Stored unwrapped so that MenuDisplay can recognise Menu.Close.
+        this.menuItems.Add(name, action);
         return this;
     }
 
