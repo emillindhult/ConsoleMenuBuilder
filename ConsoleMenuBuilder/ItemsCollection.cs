@@ -3,14 +3,9 @@
 internal sealed class ItemsCollection
 {
     private readonly List<MenuItem> menuItems = new List<MenuItem>();
-    private readonly MenuConfiguration config = new MenuConfiguration();
     private int? selectedIndex;
     private string? selectedName;
     private int currentItemIndex;
-
-    public ItemsCollection()
-    {
-    }
 
     public List<MenuItem> Items => this.menuItems;
 
@@ -27,7 +22,7 @@ internal sealed class ItemsCollection
 
     public void ResetCurrentIndex()
     {
-        this.selectedIndex = 0;
+        this.currentItemIndex = 0;
     }
 
     public MenuItem? GetSelectedItem()
